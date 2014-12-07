@@ -8,15 +8,15 @@ import urllib
 import csv
 
 NON_FBS_WQ = 0 # Non-FBS opponents are considered to have a win quality average of 0
-WQ_MULT = 0.95 # The percentage of the total counted for win quality
-SOS_MULT = 0.05 # The percentage of the total counted for strength of schedule
+WQ_MULT = 0.99 # The percentage of the total counted for win quality
+SOS_MULT = 0.01 # The percentage of the total counted for strength of schedule
 
 # List of win quality averages for FBS teams
-schools_csv = open("data/win-quality-average.csv")
+schools_csv = open("data/adjusted-win-quality-average.csv")
 schools = list(csv.reader(schools_csv))
 
 # List of win qualities for ALL games
-wins_csv = open('data/win-qualities.csv')
+wins_csv = open('data/adjusted-win-qualities.csv')
 wins = list(csv.reader(wins_csv))
 
 def wq_by_team(team_name):
@@ -42,7 +42,7 @@ def normalize(val):
     normalized = (val - float(sorted_data[-1][1])) / (float(sorted_data[0][1]) - float(sorted_data[-1][1]))
     return normalized
 
-output_file = open('data/final-data.csv', "w")
+output_file = open('data/adjusted-final-data.csv', "w")
 for school in schools:
     ADJUSTED_TOTAL = 0
     TOTAL_GAMES = 0
@@ -54,7 +54,7 @@ for school in schools:
         ADJUSTED_TOTAL += normalize(float(opp_wq))
         TOTAL_GAMES += 1
     final_rating = (normalized_wq * WQ_MULT) + ((ADJUSTED_TOTAL / TOTAL_GAMES) * SOS_MULT)
-    output_file.write(school[0] + "," + str(normalized_wq) + "," + str(ADJUSTED_TOTAL / TOTAL_GAMES) + "," + str(final_rating) + "\n")
+    output_file.write(school[0] + "," + str(round(normalized_wq,3)) + "," + str(round((ADJUSTED_TOTAL / TOTAL_GAMES),3)) + "," + str(round(final_rating,3)) + "\n")
 output_file.close()
 schools_csv.close()
 wins_csv.close()

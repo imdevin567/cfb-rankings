@@ -4,7 +4,7 @@
 
 import csv
 
-win_quality = open("data/win-qualities.csv")
+win_quality = open("data/adjusted-win-qualities.csv")
 wq = list(csv.reader(win_quality))
 rankings = sorted(wq, key=lambda x: float(x[2]), reverse=True)
 with open("data/sorted-win-qualities.csv", "w") as output_file:

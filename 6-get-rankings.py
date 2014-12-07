@@ -6,7 +6,7 @@
 
 import csv
 
-win_quality = open("data/final-data.csv")
+win_quality = open("data/adjusted-final-data.csv")
 wq = list(csv.reader(win_quality))
 
 # The key for x in the lambda can be changed to rank by different values
