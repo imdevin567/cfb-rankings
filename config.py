@@ -1,0 +1,15 @@
+LOSS_CONST = -1 # Value of a standard loss
+WIN_CONST = 1 # Value of a standard win
+ROAD_WIN_ADD = 0.07 # Bonus for road win
+HOME_LOSS_ADD = -0.07 # Penalty for home loss
+PER_POINT_MULT = 0.01 # Value of each point in point differential
+NON_FBS_MULT = 0.5 # Factor to multiply Non-FBS winning percentages by
+MIN_WINPERC = 0.05 # Minimum winning percentage to avoid 0 values for beating a team with 0 wins
+MAX_WINPERC = 0.95 # Maximum winning percentage to avoid 0 values for losing to an undefeated team
+MAX_POINT_DIFF = 42 # Maximum point differential
+NON_FBS_WQ = 0 # Non-FBS opponents are considered to have a win quality average of 0
+RAW_WQ_MULT = 0.99 # The percentage of the total counted for win quality
+RAW_SOS_MULT = 0.01 # The percentage of the total counted for strength of schedule
+NON_FBS_RATING = 0.005 # Factor to multiply Non-FBS winning percentages by
+WQ_MULT = 0.95
+SOS_MULT = 0.05
