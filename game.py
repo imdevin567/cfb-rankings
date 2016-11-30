@@ -41,5 +41,6 @@ class Game:
 
   def adjusted_quality(self):
     quality = self.raw_quality()
-    rating_factor = self.opponent.unadjusted_rating() if self.win() else abs(self.opponent.unadjusted_rating() - 1)
+    opponent_rating = min(max(self.opponent.unadjusted_rating(), config.MIN_RATING), config.MAX_RATING)
+    rating_factor = opponent_rating if self.win() else abs(opponent_rating - 1)
     return quality * rating_factor

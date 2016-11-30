@@ -21,12 +21,16 @@ class Data:
       team.normalized_wq = (team.win_quality_avg() - sorted_data[-1].win_quality_avg()) / (sorted_data[0].win_quality_avg() - sorted_data[-1].win_quality_avg())
 
   def normalize_adjusted_wq(self):
-    sorted_data = self.sorted_win_qualities()
+    sorted_data = self.sorted_adjusted_win_qualities()
     for team in self.fbs_teams():
       team.adjusted_normalized_wq = (team.adjusted_win_quality_avg() - sorted_data[-1].adjusted_win_quality_avg()) / (sorted_data[0].adjusted_win_quality_avg() - sorted_data[-1].adjusted_win_quality_avg())
 
-  def sorted_rankings(self):
-    return sorted(self.fbs_teams(), key=lambda x: x.rating(), reverse=True)
+  def sorted_rankings(self, limit=None):
+    if limit is None:
+      data = sorted(self.fbs_teams(), key=lambda x: x.rating(), reverse=True)
+    else:
+      data = sorted(self.fbs_teams(), key=lambda x: x.rating(), reverse=True)[:limit]
+    return data
 
   # Cache methods
   def clear(self):

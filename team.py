@@ -1,6 +1,8 @@
 import config
+from game import Game
 
 class Team:
+  _id = 0
   wins = 0
   losses = 0
   division = ''
@@ -8,10 +10,20 @@ class Team:
   html = None
   normalized_wq = 0
   adjusted_normalized_wq = 0
+  bcs_rank = 0
+  previous_bcs_rank = 0
 
   def __init__(self, name, url):
     self.name = name
     self.url = url
+
+  def __iter__(self):
+    yield 'Team', self.name
+    yield 'Record', str(self.wins) + '-' + str(self.losses)
+    yield 'Winning Percentage', round(self.winning_percentage(), 3)
+    yield 'Win Quality Average', round(self.adjusted_normalized_wq, 3)
+    yield 'Strength of Schedule', round(self.adjusted_strength_of_schedule(), 3)
+    yield 'Rating', round(self.rating(), 3)
 
   def winning_percentage(self):
     return float(self.wins) / len(self.games)
